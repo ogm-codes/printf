@@ -9,9 +9,15 @@ int is_print(char);
 int append_hexa(char, char[], int);
 
 int _printf(const char *format, ...);
-void print_buffer(char buffer[], int *buff_index);
+long int convert_size_unsigned(unsigned long int num, int size);
 
 #define BUFF_SIZE 1024
+
+#define MINUS 1
+#define PLUS 2
+#define HASH 8
+#define SPACE 16
+#define ZERO 4
 
 /* Sizesof int */
 #define LONG 2
@@ -35,13 +41,15 @@ int print_hexadecimal(va_list types, char buffer[], int flags,
         int width, int precision, int size);
 int print_hexa_upper(va_list types, char buffer[], int flags,
         int width, int precision, int size);
+int print_hexa(va_list types, char buffer[], int flags,
+        int width, int precision, int size);
 
 /* Print chars and string // */
-int print_string(va_list type, char buffer[], int flag,
+int print_string(va_list types, char buffer[], int flag,
 	int width, int precision, int size);
-int print_char(va_list type, char buffer[], int flag,
+int print_char(va_list types, char buffer[], int flag,
         int width, int precision, int size);
-int print_percent(va_list type, char buffer[], int flag,
+int print_percent(va_list types, char buffer[], int flag,
         int width, int precision, int size);
 
 #endif
