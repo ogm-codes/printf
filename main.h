@@ -8,7 +8,7 @@ int is_digit(char);
 int is_print(char);
 int append_hexa(char, char[], int);
 
-int _printf(const cahr *format, ...);
+int _printf(const char *format, ...);
 void print_buffer(char buffer[], int *buff_index);
 
 #define BUFF_SIZE 1024
