@@ -12,7 +12,7 @@ int handle_print(const char *fmt, int *i,
 va_list list, char buffer[], int flags, int width, int precision, int size);
 long int convert_size_unsigned(unsigned long int num, int size);
 
-#define BUFF_SIZE 1024
+#define BUFFER_SIZE 1024
 #define UNUSED(x) (void)(x)
 
 /* Flags */
@@ -26,6 +26,18 @@ long int convert_size_unsigned(unsigned long int num, int size);
 #define LONG 2
 #define SHORT 1
 
+/**
+ * struct fmt - Struct fmt
+ * @fmt: format specifier
+ * @fn: function pointer associated with format specififier
+ */
+struct fmt
+{
+	char fmt;
+	int (*fn)(va_list, char[], int, int, int, int);
+};
+
+/* function specifiers */
 int get_flags(const char *format, int *i);
 int get_size(const char *format, int *i);
 int get_precision(const char *format, int *i, va_list list);
