@@ -9,7 +9,7 @@ void flush_buffer(char buffer[], int *buffer_index);
  */
 int _printf(const char *format, ...)
 {
-	char buffer[BUFFER_SIZE];
+	char buffer[BUFF_SIZE];
 	int buffer_index, printed_chars = 0;
 	int size, width, precision, flags, print = 0;
 	va_list args;
@@ -24,7 +24,7 @@ int _printf(const char *format, ...)
 		if (format[i] != '%')
 		{
 			buffer[buffer_index++] = format[i];
-			if (buffer_index == BUFFER_SIZE)
+			if (buffer_index == BUFF_SIZE)
 			{
 				flush_buffer(buffer, &buffer_index);
 			}
