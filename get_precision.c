@@ -4,7 +4,7 @@
  * @format: string format to search for size modifier.
  * @i: pointer to current index
  * Return: value corresponding to size modifier
- */ 
+ */
 int get_size(const char *format, int *i)
 {
 	int index = *i + 1;

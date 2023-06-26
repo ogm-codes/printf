@@ -42,6 +42,7 @@ int print_binary(va_list types, char buffer[],
 			count++;
 		}
 	}
+
 	return (count);
 }
 
@@ -58,6 +59,7 @@ int print_binary(va_list types, char buffer[],
 int print_int(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
+
 }
 
 int print_percent(va_list types, char buffer[],
@@ -67,7 +69,7 @@ int print_percent(va_list types, char buffer[],
 }
 
 /**
- * print_string - Prints an unsigned number
+ * print_string - Prints an unsigned string
  * @types: Lista of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
@@ -123,7 +125,7 @@ int print_string(va_list types, char buffer[],
 }
 
 /**
- * print_char - Prints an unsigned number
+ * print_char - Prints an unsigned char
  * @types: Lista of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
