@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * get_flags -
- * @format:
- * @i:
- * Return: flag
+ * get_flags - gets flags from the format
+ * @format: where to search for flags
+ * @i: pointer to index in format
+ * Return: flag value that matches flag character found
  */
 int get_flags(const char *format, int *i)
 {
@@ -14,7 +14,7 @@ int get_flags(const char *format, int *i)
 
 	for(curr_i = *i + 1; format[curr_i] != '\0'; curr_i++)
 	{
-		for (c = 0; FLAGS[J] != '\0'; c++)
+		for (c = 0; FLAGS[c] != '\0'; c++)
 		{
 			if (format[curr_i] == ASTERISKS[c])
 			{
