@@ -69,7 +69,7 @@ int print_int(va_list types, char buffer[],
 	if (n == 0)
 		buffer[i--] = '0';
 
-	buffer[BUFF_SIZE - 1] = '\0';
+	buffer[BUFFER_SIZE - 1] = '\0';
 	num = (unsigned long int)n;
 
 	if (n < 0)
@@ -117,7 +117,7 @@ int print_string(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	char *string = va_arg(types, char *);
-	int length = 0;
+	int length = 0, c;
 
 	UNUSED(buffer);
 	UNUSED(size);
@@ -129,7 +129,7 @@ int print_string(va_list types, char buffer[],
 	{
 		string = "(null)";
 		if (precision >= 6)
-			str = "      ";
+			string = "      ";
 	}
 
 	while (string[length] != '\0')
@@ -142,21 +142,20 @@ int print_string(va_list types, char buffer[],
 	{
 		if (flags & MINUS)
 		{
-			write(1, &str[0], length);
-			for (i = width - length; i > 0; i--)
+			write(1, &string[0], length);
+			for (c = width - length; c > 0; c--)
 				write(1, " ", 1);
 			return (width);
 		}
 		else
 		{
-			for (i = width - length; i > 0; i--)
+			for (c = width - length; c > 0; c--)
 				write(1, " ", 1);
-			write(1, &str[0], length);
+			write(1, &string[0], length);
 			return (width);
 		}
 	}
-
-	return (write(1, str, length));
+	return (write(1, string, length));
 }
 
 /**
@@ -174,5 +173,5 @@ int print_char(va_list types, char buffer[],
 {
 	char chars = va_arg(types, int);
 
-	return (handle_write_char(c, buffer, flags, width, precision, size));
+	return (handle_write_char(chars, buffer, flags, width, precision, size));
 }

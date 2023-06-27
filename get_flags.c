@@ -16,9 +16,9 @@ int get_flags(const char *format, int *i)
 	{
 		for (c = 0; FLAGS[c] != '\0'; c++)
 		{
-			if (format[curr_i] == ASTERISKS[c])
+			if (format[index] == ASTERISKS[c])
 			{
-				flag = FLAGS[c];
+				flag |= FLAGS[c];
 				break;
 			}
 
