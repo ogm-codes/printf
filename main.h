@@ -27,13 +27,6 @@ long int convert_size_unsigned(unsigned long int num, int size);
 #define SHORT 1
 
 /**
- * typedef struct fmt fmt_t - represents format specifier
- * @fmt: The format.
- * @fm_t: The function associated.
- */
-typedef struct formatSpecifier;
-
-/**
  * struct fmt - Struct fmt
  * @fmt: format specifier
  * @fn: function pointer associated with format specififier
@@ -43,6 +36,13 @@ struct fmt
 	char fmt;
 	int (*fn)(va_list, char[], int, int, int, int);
 };
+
+/**
+ * typedef struct fmt fmt_t - represents format specifier
+ * @fmt: The format.
+ * @fm_t: The function associated.
+ */
+typedef struct fmt formatSpecifier;
 
 /* function specifiers */
 int get_flags(const char *format, int *i);
