@@ -8,11 +8,11 @@
  */
 int get_flags(const char *format, int *i)
 {
-	int flag, c, curr_i = 0;
+	int flag, c, index = 0;
 	const char ASTERISKS[] = {'+', '-', '0', '#', ' ', '\0'};
 	const int FLAGS = {MINUS, PLUS, ZERO, HASH, SPACE, 0};
 
-	for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i++)
+	for (index = *i + 1; format[index] != '\0'; index++)
 	{
 		for (c = 0; FLAGS[c] != '\0'; c++)
 		{
@@ -26,6 +26,6 @@ int get_flags(const char *format, int *i)
 				break;
 		}
 	}
-		*i = curr_i - 1;
+		*i = index - 1;
 		return (flag);
 }

@@ -3,24 +3,25 @@
 /**
  * get_size - Calculates the size to cast the argument
  * @format: Formatted string in which to print the arguments
- * @i: List of arguments to be printed.
- *
+ * @i: List of arguments
  * Return: Precision.
  */
 int get_size(const char *format, int *i)
 {
-	int curr_i = *i + 1;
+	int index = *i + 1;
 	int size = 0;
 
-	if (format[curr_i] == 'l')
-		size = S_LONG;
-	else if (format[curr_i] == 'h')
-		size = S_SHORT;
+	if (format[index] == 'l')
+	{
+		size = LONG;
+	}
+	else if (format[index] == 'h')
+		size = SHORT;
 
 	if (size == 0)
-		*i = curr_i - 1;
+		*i = index - 1;
 	else
-		*i = curr_i;
+		*i = index;
 
 	return (size);
 }

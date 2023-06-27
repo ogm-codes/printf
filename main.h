@@ -42,7 +42,7 @@ struct fmt
  * @fmt: The format.
  * @fm_t: The function associated.
  */
-typedef struct fmt formatSpecifier;
+typedef struct fmt fmt_t;
 
 /* function specifiers */
 int get_flags(const char *format, int *i);
