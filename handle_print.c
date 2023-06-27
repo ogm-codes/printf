@@ -23,36 +23,42 @@ int handle_print(const char *fmt, int *index, va_list list, char buffer[],
 		{'X', print_hexa_upper}, {'p', print_pointer}, {'S', print_non_printable},
 		{'r', print_reverse}, {'R', print_rot13string}, {'\0', NULL}
 	};
-	
-	for (i = 0; fmt_types[i].fmt != '\0'; i++) {
-		if (fmt[*index] == fmt_types[i].fmt) {
-			return fmt_types[i].fn(list, buffer, flags, width, precision, size);
+
+	for (i = 0; fmt_types[i].fmt != '\0'; i++)
+	{
+		if (fmt[*index] == fmt_types[i].fmt)
+		{
+			return (fmt_types[i].fn(list, buffer, flags, width, precision, size));
 		}
 	}
 
-	if (fmt_types[i].fmt == '\0') {
-		if (fmt[*index] == '\0') {
-			return -1;
-		}
+	if (fmt_types[i].fmt == '\0')
+	{
+		if (fmt[*index] == '\0')
+			return (-1);
 
 		unknown_len += write(1, "%%", 1);
-		if (fmt[*index - 1] == ' ') {
+		if (fmt[*index - 1] == ' ')
+		{
 			unknown_len += write(1, " ", 1);
 		}
-		else if (width) {
+		else if (width)
+		{
 			--(*index);
-			while (fmt[*index] != ' ' && fmt[*index] != '%') {
+			while (fmt[*index] != ' ' && fmt[*index] != '%')
+			{
 				--(*index);
 			}
-			if (fmt[*index] == ' ') {
+			if (fmt[*index] == ' ')
+			{
 				--(*index);
 			}
-			return 1;
+			return (1);
 		}
 		unknown_len += write(1, &fmt[*index], 1);
-		return unknown_len;
+		return (unknown_len);
 	}
 
-	return printed_chars;
+	return (printed_chars);
 }
 
