@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 {
 	char buffer[BUFFER_SIZE];
 	int buffer_index, printed_chars = 0;
-	int size, width, precision, flags, print = 0;
+	int i, size, width, precision, flags, print = 0;
 	va_list args;
 
 	if (format == NULL)
@@ -19,7 +19,7 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	for (int i = 0; format && format[i] != '\0'; i++)
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
 		if (format[i] != '%')
 		{
