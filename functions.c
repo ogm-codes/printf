@@ -59,13 +59,48 @@ int print_binary(va_list types, char buffer[],
 int print_int(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
+	int i = BUFFER_SIZE - 2;
+	int is_negative = 0;
+	long int n = va_arg(types, long int);
+	unsigned long int num;
+
+	n = convert_size_number(n, size);
+
+	if (n == 0)
+		buffer[i--] = '0';
+
+	buffer[BUFF_SIZE - 1] = '\0';
+	num = (unsigned long int)n;
+
+	if (n < 0)
+	{
+		num = (unsigned long int)((-1) * n);
+		is_negative = 1;
+	}
+
+	while (num > 0)
+	{
+		buffer[i--] = (num % 10) + '0';
+		num /= 10;
+	}
+
+	i++;
+
+	return (write_number(is_negative, i, buffer, flags, width, precision, size));
 
 }
 
 int print_percent(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
+	UNUSED(types);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
+	UNUSED(buffer);
 
+	return (write(1, "%%", 1));
 }
 
 /**
@@ -91,37 +126,37 @@ int print_string(va_list types, char buffer[],
 	UNUSED(precision);
 
 	if (string == NULL)
-        {
-                string = "(null)";
-                if (precision >= 6)
-                        str = "      ";
-        }
+	{
+		string = "(null)";
+		if (precision >= 6)
+			str = "      ";
+	}
 
-        while (string[length] != '\0')
-                length++;
+	while (string[length] != '\0')
+		length++;
 
-        if (precision >= 0 && precision < length)
-                length = precision;
+	if (precision >= 0 && precision < length)
+		length = precision;
 
-        if (width > length)
-        {
-                if (flags & MINUS)
-                {
-                        write(1, &str[0], length);
-                        for (i = width - length; i > 0; i--)
-                                write(1, " ", 1);
-                        return (width);
-                }
-                else
-                {
-                        for (i = width - length; i > 0; i--)
-                                write(1, " ", 1);
-                        write(1, &str[0], length);
-                        return (width);
-                }
-        }
+	if (width > length)
+	{
+		if (flags & MINUS)
+		{
+			write(1, &str[0], length);
+			for (i = width - length; i > 0; i--)
+				write(1, " ", 1);
+			return (width);
+		}
+		else
+		{
+			for (i = width - length; i > 0; i--)
+				write(1, " ", 1);
+			write(1, &str[0], length);
+			return (width);
+		}
+	}
 
-        return (write(1, str, length));
+	return (write(1, str, length));
 }
 
 /**
