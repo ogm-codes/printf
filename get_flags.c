@@ -10,7 +10,7 @@ int get_flags(const char *format, int *i)
 {
 	int flag, c, index = 0;
 	const char ASTERISKS[] = {'+', '-', '0', '#', ' ', '\0'};
-	const int FLAGS = {MINUS, PLUS, ZERO, HASH, SPACE, 0};
+	const int FLAGS[] = {MINUS, PLUS, ZERO, HASH, SPACE, 0};
 
 	for (index = *i + 1; format[index] != '\0'; index++)
 	{
