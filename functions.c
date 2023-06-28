@@ -60,9 +60,12 @@ int print_int(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int i = BUFFER_SIZE - 2;
+
 	int is_negative = 0;
+
+	unsigned int long num;
+
 	long int n = va_arg(types, long int);
-	unsigned long int num;
 
 	n = convert_size_number(n, size);
 
@@ -70,11 +73,11 @@ int print_int(va_list types, char buffer[],
 		buffer[i--] = '0';
 
 	buffer[BUFFER_SIZE - 1] = '\0';
-	num = (unsigned long int)n;
+	num = (unsigned int long)n;
 
 	if (n < 0)
 	{
-		num = (unsigned long int)((-1) * n);
+		num = (unsigned int long)((-1) * n);
 		is_negative = 1;
 	}
 
