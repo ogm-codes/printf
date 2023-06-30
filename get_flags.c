@@ -1,31 +1,29 @@
 #include "main.h"
-
 /**
- * get_flags - gets flags from the format
- * @format: where to search for flags
- * @i: pointer to index in format
- * Return: flag value that matches flag character found
+ * get_flags - check flags
+ * @format: the arguments
+ * @i: takes in a value
+ * Return: flag
  */
 int get_flags(const char *format, int *i)
 {
-	int flag, c, index = 0;
-	const char ASTERISKS[] = {'+', '-', '0', '#', ' ', '\0'};
-	const int FLAGS[] = {MINUS, PLUS, ZERO, HASH, SPACE, 0};
+	int j, curr_i;
+	int flags = 0;
+	const char FLAGS_CH[] = {'-', '+', '0', '#', ' ', '\0'};
+	const int FLAGS_ARR[] = {F_MINUS, F_PLUS, F_ZERO, F_HASH, F_SPACE, 0};
 
-	for (index = *i + 1; format[index] != '\0'; index++)
+	for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i++)
 	{
-		for (c = 0; FLAGS[c] != '\0'; c++)
-		{
-			if (format[index] == ASTERISKS[c])
+		for (j = 0; FLAGS_CH[j] != '\0'; j++)
+			if (format[curr_i] == FLAGS_CH[j])
 			{
-				flag |= FLAGS[c];
+				flags |= FLAGS_ARR[j];
 				break;
 			}
 
-			if (ASTERISKS[c] == 0)
-				break;
-		}
+		if (FLAGS_CH[j] == 0)
+			break;
 	}
-		*i = index - 1;
-		return (flag);
+	*i = curr_i - 1;
+	return (flags);
 }

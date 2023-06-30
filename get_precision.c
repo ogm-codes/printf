@@ -1,28 +1,39 @@
 #include "main.h"
 /**
- * get_size - Retrieves size modifier from format string
- * @format: string format to search for size modifier.
- * @i: pointer to current index
- * Return: value corresponding to size modifier
+ * get_precision - gets precision
+ * @format: pointer
+ * @i: pointer
+ * @list: arguments
+ * Return: precision
  */
-int get_size(const char *format, int *i)
+int get_precision(const char *format, int *i, va_list list)
 {
-	int index = *i + 1;
-	int size = 0;
+	int curr_int = *i + 1;
+	int precision = -1;
 
-	if (format[index] == 'l')
-		size = LONG;
-	else if (format[index] == 'h')
-		size = SHORT;
+	if (format[curr_int] != '.')
+		return (precision);
 
-	if (size == 0)
+	precision = 0;
+
+	for (curr_int += 1; format[curr_int] != '\0'; curr_int++)
 	{
-		*i = index - 1;
-	}
-	else
-	{
-		*i = index;
+		if (is_digit(format[curr_int]))
+		{
+			precision *= 10;
+			precision += format[curr_int] - '0';
+		}
+		else if (format[curr_int] == '*')
+		{
+			curr_int++;
+			precision = va_arg(list, int);
+			break;
+		}
+		else
+			break;
 	}
 
-	return (size);
+	*i = curr_int - 1;
+
+	return (precision);
 }
